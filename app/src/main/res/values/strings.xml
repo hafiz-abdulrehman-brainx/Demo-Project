@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Demo Project</string>
+    <string name="signInLink" >Already a member? <a href="#">Sign In</a> </string>
+    <string name="powerLink"><a href="#">POWERED BY</a></string>
+</resources>
