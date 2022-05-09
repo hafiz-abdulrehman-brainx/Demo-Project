@@ -1,4 +1,4 @@
-package com.example.demoproject
+package com.example.demoproject.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,7 +12,7 @@ class RecyclerAdapter(private val titles:List<String>, private val images:List<I
     interface onItemClickListener{
         fun onItemClick(position:Int)
     }
-    fun setOnClickListener(myListener:onItemClickListener){
+    fun setOnClickListener(myListener: onItemClickListener){
         _myListener = myListener
     }
     inner class MyViewHolder(val binding: ItemLayoutBinding,listener: onItemClickListener):RecyclerView.ViewHolder(binding.root) {

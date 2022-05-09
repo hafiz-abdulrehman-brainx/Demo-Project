@@ -1,9 +1,9 @@
-package com.example.demoproject
+package com.example.demoproject.activities
 
-import android.app.ActionBar
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.demoproject.adapters.TrainingRecyclerAdapter
 import com.example.demoproject.databinding.ActivityTrainingBinding
 
 class TrainingActivity : AppCompatActivity() {

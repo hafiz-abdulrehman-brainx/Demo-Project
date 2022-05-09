@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.widget.Button
+import com.example.demoproject.activities.TabLayoutClass
 import com.example.demoproject.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnSignUp.setOnClickListener {
-            val intent = Intent(this,TabLayoutClass::class.java).run {
+            val intent = Intent(this, TabLayoutClass::class.java).run {
                 startActivity(this)
             }
         }

@@ -1,8 +1,10 @@
-package com.example.demoproject
+package com.example.demoproject.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
+import com.example.demoproject.R
+import com.example.demoproject.adapters.ViewPageAdapter
 import com.example.demoproject.databinding.ActivityTabLayoutBinding
 
 class TabLayoutClass : AppCompatActivity() {

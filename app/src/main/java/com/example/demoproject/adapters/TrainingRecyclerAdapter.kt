@@ -1,9 +1,8 @@
-package com.example.demoproject
+package com.example.demoproject.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.demoproject.databinding.ItemLayoutBinding
 import com.example.demoproject.databinding.TrainingItemLayoutBinding
 
 class TrainingRecyclerAdapter(private val trainingNames:List<String>):RecyclerView.Adapter<TrainingRecyclerAdapter.MyTrainingViewHolder>() {

@@ -1,4 +1,4 @@
-package com.example.demoproject
+package com.example.demoproject.fragments
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.demoproject.R
+import com.example.demoproject.adapters.RecyclerAdapter
+import com.example.demoproject.activities.TrainingActivity
 import com.example.demoproject.databinding.FragmentHomeBinding
 
 
@@ -34,12 +37,12 @@ class HomeFragment : Fragment() {
         binding.Rv.apply {
             layoutManager =GridLayoutManager(requireContext(),2, GridLayoutManager.VERTICAL,false)
         }
-        adapter.setOnClickListener(object :RecyclerAdapter.onItemClickListener{
+        adapter.setOnClickListener(object : RecyclerAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
                 Toast.makeText(requireContext().applicationContext,"item clicked :${titles[position].toString()}", Toast.LENGTH_SHORT).show()
                 if(position ==4)
                 {
-                    val intent = Intent(requireContext().applicationContext,TrainingActivity::class.java).run{
+                    val intent = Intent(requireContext().applicationContext, TrainingActivity::class.java).run{
                         startActivity(this)
                     }
                 }

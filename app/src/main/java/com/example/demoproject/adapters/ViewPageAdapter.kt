@@ -1,9 +1,12 @@
-package com.example.demoproject
+package com.example.demoproject.adapters
 
 import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.example.demoproject.fragments.HomeFragment
+import com.example.demoproject.fragments.NotificationsFragment
+import com.example.demoproject.fragments.SettingFragment
 
 class ViewPageAdapter(fm:FragmentManager):FragmentPagerAdapter(fm) {
     @Suppress("DEPRECATION")

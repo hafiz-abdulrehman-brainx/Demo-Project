@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DemoProject">
         <activity
-            android:name=".TrainingActivity"
+            android:name=".activities.TrainingActivity"
             android:exported="true"
             android:label="Training"
-            android:parentActivityName=".TabLayoutClass"
+            android:parentActivityName=".activities.TabLayoutClass"
             >
 <!--            <intent-filter>-->
 <!--                            <action android:name="android.intent.action.MAIN" />-->
@@ -22,7 +22,7 @@
 <!--            </intent-filter>-->
         </activity>
         <activity
-            android:name=".TabLayoutClass"
+            android:name=".activities.TabLayoutClass"
             android:exported="true"
             android:label="Welcome">
 <!--            <intent-filter>-->
