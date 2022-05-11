@@ -1,21 +1,21 @@
 package com.example.demoproject.fragments
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
-import com.example.demoproject.R
-import com.example.demoproject.adapters.RecyclerAdapter
-import com.example.demoproject.activities.TrainingActivity
-import com.example.demoproject.databinding.FragmentHomeBinding
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.demoproject.MainActivity
+import com.example.demoproject.R
+import com.example.demoproject.activities.TrainingActivity
+import com.example.demoproject.adapters.RecyclerAdapter
+import com.example.demoproject.databinding.FragmentHomeBinding
 import com.example.demoproject.model.User
 import com.example.demoproject.repository.Repository
+import com.example.demoproject.utils.SharedPrefs
 import com.example.demoproject.viewModel.LoginViewModel
 import com.example.demoproject.viewModel.LoginViewModelFactory
 
@@ -25,7 +25,7 @@ class HomeFragment : Fragment() {
     private lateinit var titles:List<String>
     private lateinit var binding: FragmentHomeBinding
     private lateinit var loginViewModel: LoginViewModel
-
+    private lateinit var sharedPrefs :SharedPrefs
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,14 +37,12 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sharedPrefs = SharedPrefs(requireActivity())
         setAssets()
-        initializeViewModel()
+        initializeViewModel(sharedPrefs)
         recyclerFunction()
-        val sharedPrefs = requireActivity().getSharedPreferences("userCredentials",
-            AppCompatActivity.MODE_PRIVATE
-        )
-        val username = sharedPrefs.getString("username","hafiz.abdulrehman@gmail.com")
-        val password = sharedPrefs.getString("password","123456")
+        val username = sharedPrefs.username
+        val password = sharedPrefs.password
         val user = User(email = username!!,password = password)
         loginViewModel.loginUser(user)
         loginViewModel.userResponse.observe(viewLifecycleOwner) { response ->
@@ -52,11 +50,12 @@ class HomeFragment : Fragment() {
         }
 
         binding.btnLogout.setOnClickListener {
-            if(sharedPrefs.contains("isLogin"))
+            if(sharedPrefs.login)
             {
-                val editor = sharedPrefs.edit()
-                editor.clear()
-                editor.apply()
+                sharedPrefs.editor.apply{
+                    clear()
+                    apply()
+                }
                 Intent(requireContext().applicationContext, MainActivity::class.java).run{
                     startActivity(this)
                 }
@@ -77,14 +76,14 @@ class HomeFragment : Fragment() {
             R.drawable.todo,
             R.drawable.tips,
             R.drawable.progress,
-            R.drawable.events,
+            R.drawable.event,
             R.drawable.training,
             R.drawable.comment
         )
     }
-    private fun initializeViewModel() {
+    private fun initializeViewModel(sharedPrefs: SharedPrefs) {
         val repository = Repository()
-        val loginViewModel1 : LoginViewModel by viewModels{ LoginViewModelFactory(repository) }
+        val loginViewModel1 : LoginViewModel by viewModels{ LoginViewModelFactory(repository,sharedPrefs) }
         loginViewModel = loginViewModel1
 
     }
@@ -94,7 +93,7 @@ class HomeFragment : Fragment() {
         binding.Rv.apply {
             layoutManager =GridLayoutManager(requireContext(),2, GridLayoutManager.VERTICAL,false)
         }
-        adapter.setOnClickListener(object : RecyclerAdapter.onItemClickListener {
+        adapter.setOnClickListener(object : RecyclerAdapter.OnItemClickListener {
             override fun onItemClick(position: Int) {
                 Toast.makeText(requireContext().applicationContext,"item clicked :${titles[position]}", Toast.LENGTH_SHORT).show()
                 if(position ==4)

@@ -7,15 +7,15 @@ import com.example.demoproject.databinding.ItemLayoutBinding
 
 class RecyclerAdapter(private val titles:List<String>, private val images:List<Int>):RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>(){
 
-    private lateinit var _myListener: onItemClickListener
+    private lateinit var _myListener: OnItemClickListener
     private lateinit var binding: ItemLayoutBinding
-    interface onItemClickListener{
+    interface OnItemClickListener{
         fun onItemClick(position:Int)
     }
-    fun setOnClickListener(myListener: onItemClickListener){
+    fun setOnClickListener(myListener: OnItemClickListener){
         _myListener = myListener
     }
-    inner class MyViewHolder(val binding: ItemLayoutBinding,listener: onItemClickListener):RecyclerView.ViewHolder(binding.root) {
+    inner class MyViewHolder(val binding: ItemLayoutBinding,listener: OnItemClickListener):RecyclerView.ViewHolder(binding.root) {
         init {
             itemView.setOnClickListener {
                 listener.onItemClick(adapterPosition)

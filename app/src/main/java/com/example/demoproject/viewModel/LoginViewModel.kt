@@ -6,16 +6,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.demoproject.model.User
 import com.example.demoproject.repository.Repository
+import com.example.demoproject.utils.SharedPrefs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.Exception
 
-class LoginViewModel(private val repository: Repository):ViewModel() {
+class LoginViewModel(private val repository: Repository,private val sharedPrefs: SharedPrefs):ViewModel() {
     val userResponse : MutableLiveData<User> = MutableLiveData()
-    fun loginUser( user: User){
+    lateinit var accessToken:String
+    lateinit var clientId:String
+    fun loginUser( user: User ){
+
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val call : Call<User> =   repository.loginUser(user)
@@ -23,8 +26,15 @@ class LoginViewModel(private val repository: Repository):ViewModel() {
                     override fun onResponse(call: Call<User>, response: Response<User>) {
                         if(response?.body() !=null){
                             userResponse.postValue(response.body())
-                            val accessToken = response.headers()["Access-Token"].toString()
-                            Log.d("access token",accessToken)
+                            response.headers().apply {
+                                accessToken = this["Access-Token"].toString()
+                                clientId =    this["client"].toString()
+                            }
+                            sharedPrefs.apply {
+                                token =accessToken
+                                client=clientId
+                            }
+
                         }
 
                     }
@@ -35,7 +45,7 @@ class LoginViewModel(private val repository: Repository):ViewModel() {
             }
             catch (e: Exception)
             {
-                Log.d("Exception", e.toString())
+                Log.d("Exception1", e.toString())
             }
         }
     }
