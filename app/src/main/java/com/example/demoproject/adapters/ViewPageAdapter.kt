@@ -9,31 +9,25 @@ import com.example.demoproject.fragments.NotificationsFragment
 import com.example.demoproject.fragments.SettingFragment
 
 class ViewPageAdapter(fm:FragmentManager):FragmentPagerAdapter(fm) {
-    @Suppress("DEPRECATION")
-    internal class TabsAdapter(
-        var context: Context,
-        fm: FragmentManager,
-        var totalTabs: Int,
-    )
     override fun getCount(): Int {
        return 3
     }
 
     override fun getItem(position: Int): Fragment {
-       when(position){
-           0->{
-                return HomeFragment()
-           }
-           1->{
-               return NotificationsFragment()
-           }
-           2->{
-               return SettingFragment()
-           }
-           else->{
-               return HomeFragment()
-           }
-       }
+        return when(position){
+            0->{
+                HomeFragment()
+            }
+            1->{
+                NotificationsFragment()
+            }
+            2->{
+                SettingFragment()
+            }
+            else->{
+                HomeFragment()
+            }
+        }
     }
 
     override fun getPageTitle(position: Int): CharSequence? {

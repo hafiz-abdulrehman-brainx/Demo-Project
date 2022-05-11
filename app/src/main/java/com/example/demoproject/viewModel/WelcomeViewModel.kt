@@ -15,33 +15,7 @@ import retrofit2.Response
 import java.lang.Exception
 
 class WelcomeViewModel(private val repository: Repository):ViewModel() {
-    val userResponse :MutableLiveData<User> = MutableLiveData()
 
-    fun loginUser( user: User){
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-//                val user = User(email = "hafiz_training@mailinator.com",password = "123456")
-                val call : Call<User> =   repository.loginUser(user)
-                call.enqueue(object:Callback<User>{
-                    override fun onResponse(call: Call<User>, response: Response<User>) {
-                        if(response?.body() !=null){
-                            userResponse.postValue(response.body())
-                        }
-
-                    }
-
-                    override fun onFailure(call: Call<User>, t: Throwable) {
-                       Log.d("Exception","Data not found")
-                    }
-
-                })
-            }
-            catch (e:Exception)
-            {
-                Log.d("Exception", e.toString())
-            }
-        }
-    }
     fun getQuote(){
 
     }

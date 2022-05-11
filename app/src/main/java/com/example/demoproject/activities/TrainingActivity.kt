@@ -14,7 +14,7 @@ class TrainingActivity : AppCompatActivity() {
         binding = ActivityTrainingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true);
+        supportActionBar?.setDisplayHomeAsUpEnabled(true);
 
         initializeTrainingNames()
         binding.Rv2.apply {

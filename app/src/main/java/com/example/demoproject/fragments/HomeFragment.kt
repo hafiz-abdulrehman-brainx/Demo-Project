@@ -1,29 +1,30 @@
 package com.example.demoproject.fragments
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.demoproject.R
 import com.example.demoproject.adapters.RecyclerAdapter
 import com.example.demoproject.activities.TrainingActivity
 import com.example.demoproject.databinding.FragmentHomeBinding
-import com.example.demoproject.viewModel.WelcomeViewModel
 import androidx.fragment.app.viewModels
+import com.example.demoproject.MainActivity
 import com.example.demoproject.model.User
 import com.example.demoproject.repository.Repository
-import com.example.demoproject.viewModel.WelcomeViewModelFactory
+import com.example.demoproject.viewModel.LoginViewModel
+import com.example.demoproject.viewModel.LoginViewModelFactory
 
 class HomeFragment : Fragment() {
 
     private lateinit var images:List<Int>
-    lateinit var titles:List<String>
+    private lateinit var titles:List<String>
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var welcomeViewModel: WelcomeViewModel
+    private lateinit var loginViewModel: LoginViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,39 +38,30 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setAssets()
-        val adapter = RecyclerAdapter( titles,images )
-        binding.Rv.adapter = adapter
-        binding.Rv.apply {
-            layoutManager =GridLayoutManager(requireContext(),2, GridLayoutManager.VERTICAL,false)
+        initializeViewModel()
+        recyclerFunction()
+        val sharedPrefs = requireActivity().getSharedPreferences("userCredentials",
+            AppCompatActivity.MODE_PRIVATE
+        )
+        val username = sharedPrefs.getString("username","hafiz.abdulrehman@gmail.com")
+        val password = sharedPrefs.getString("password","123456")
+        val user = User(email = username!!,password = password)
+        loginViewModel.loginUser(user)
+        loginViewModel.userResponse.observe(viewLifecycleOwner) { response ->
+        binding.welcomeTxt.text = "WELCOME "+ response.name.toString()
         }
-        adapter.setOnClickListener(object : RecyclerAdapter.onItemClickListener {
-            override fun onItemClick(position: Int) {
-                Toast.makeText(requireContext().applicationContext,"item clicked :${titles[position]}", Toast.LENGTH_SHORT).show()
-                if(position ==4)
-                {
-                    Intent(requireContext().applicationContext, TrainingActivity::class.java).run{
-                        startActivity(this)
-                    }
+
+        binding.btnLogout.setOnClickListener {
+            if(sharedPrefs.contains("isLogin"))
+            {
+                val editor = sharedPrefs.edit()
+                editor.clear()
+                editor.apply()
+                Intent(requireContext().applicationContext, MainActivity::class.java).run{
+                    startActivity(this)
                 }
             }
-        })
-
-        createViewModel()
-
-        val bundle = arguments
-        Log.d("bundle object", bundle.toString())
-        val username = bundle?.getString("username") ?: "hafiz_training@mailinator.com"
-        val password = bundle?.getString("password") ?: "123456"
-        val user = User(email = username!!,password = password)
-        welcomeViewModel.loginUser(user)
-        welcomeViewModel.userResponse.observe(viewLifecycleOwner) { response ->
-        binding.welcomeTxt.append(response.name.toString())
         }
-    }
-    private fun createViewModel() {
-        val repository = Repository()
-        val welcomeViewModel1 : WelcomeViewModel by viewModels{ WelcomeViewModelFactory(repository) }
-        welcomeViewModel = welcomeViewModel1
 
     }
     private fun setAssets() {
@@ -90,4 +82,29 @@ class HomeFragment : Fragment() {
             R.drawable.comment
         )
     }
+    private fun initializeViewModel() {
+        val repository = Repository()
+        val loginViewModel1 : LoginViewModel by viewModels{ LoginViewModelFactory(repository) }
+        loginViewModel = loginViewModel1
+
+    }
+    private fun recyclerFunction() {
+        val adapter = RecyclerAdapter( titles,images )
+        binding.Rv.adapter = adapter
+        binding.Rv.apply {
+            layoutManager =GridLayoutManager(requireContext(),2, GridLayoutManager.VERTICAL,false)
+        }
+        adapter.setOnClickListener(object : RecyclerAdapter.onItemClickListener {
+            override fun onItemClick(position: Int) {
+                Toast.makeText(requireContext().applicationContext,"item clicked :${titles[position]}", Toast.LENGTH_SHORT).show()
+                if(position ==4)
+                {
+                    Intent(requireContext().applicationContext, TrainingActivity::class.java).run{
+                        startActivity(this)
+                    }
+                }
+            }
+        })
+    }
+
 }
