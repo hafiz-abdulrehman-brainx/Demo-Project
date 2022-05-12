@@ -13,39 +13,36 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class LoginViewModel(private val repository: Repository,private val sharedPrefs: SharedPrefs):ViewModel() {
-    val userResponse : MutableLiveData<User> = MutableLiveData()
-    lateinit var accessToken:String
-    lateinit var clientId:String
-    fun loginUser( user: User ){
+class LoginViewModel(private val repository: Repository, private val sharedPrefs: SharedPrefs) :
+    ViewModel() {
+    val userResponse: MutableLiveData<User> = MutableLiveData()
+    lateinit var accessToken: String
+    lateinit var clientId: String
+    fun loginUser(user: User) {
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val call : Call<User> =   repository.loginUser(user)
-                call.enqueue(object: Callback<User> {
+                val call: Call<User> = repository.loginUser(user)
+                call.enqueue(object : Callback<User> {
                     override fun onResponse(call: Call<User>, response: Response<User>) {
-                        if(response?.body() !=null){
+                        if (response.body() != null) {
                             userResponse.postValue(response.body())
                             response.headers().apply {
                                 accessToken = this["Access-Token"].toString()
-                                clientId =    this["client"].toString()
+                                clientId = this["client"].toString()
                             }
                             sharedPrefs.apply {
-                                token =accessToken
-                                client=clientId
+                                token = accessToken
+                                client = clientId
                             }
-
                         }
-
                     }
                     override fun onFailure(call: Call<User>, t: Throwable) {
-                        Log.d("Exception","Data not found")
+                        Log.d("Exception", "Data not found")
                     }
                 })
-            }
-            catch (e: Exception)
-            {
-                Log.d("Exception1", e.toString())
+            } catch (e: Exception) {
+                Log.d("Exception", e.toString())
             }
         }
     }

@@ -1,48 +1,49 @@
 package com.example.demoproject.adapters
 
-import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
+import androidx.lifecycle.Lifecycle
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.demoproject.fragments.HomeFragment
 import com.example.demoproject.fragments.NotificationsFragment
 import com.example.demoproject.fragments.SettingFragment
 
-class ViewPageAdapter(fm:FragmentManager):FragmentPagerAdapter(fm) {
-    override fun getCount(): Int {
-       return 3
-    }
-
-    override fun getItem(position: Int): Fragment {
-        return when(position){
-            0->{
-                HomeFragment()
-            }
-            1->{
-                NotificationsFragment()
-            }
-            2->{
-                SettingFragment()
-            }
-            else->{
-                HomeFragment()
-            }
-        }
-    }
-
-    override fun getPageTitle(position: Int): CharSequence? {
-        when(position) {
+class ViewPageAdapter(fm: FragmentManager,lifecycle: Lifecycle) : FragmentStateAdapter(fm,lifecycle) {
+    override fun createFragment(position: Int): Fragment {
+        return when (position) {
             0 -> {
-                return "Home"
+                HomeFragment()
             }
             1 -> {
-                return "Notification"
+                NotificationsFragment()
             }
             2 -> {
-                return "Setting"
+                SettingFragment()
+            }
+            else -> {
+                HomeFragment()
             }
         }
-        return super.getPageTitle(position)
     }
+    override fun getItemCount(): Int {
+        return 3
+    }
+//
+//    fun getPageTitle(position: Int): CharSequence? {
+//        when (position) {
+//            0 -> {
+//                return "Home"
+//            }
+//            1 -> {
+//                return "Notification"
+//            }
+//            2 -> {
+//                return "Setting"
+//            }
+//        }
+//        return "Home"
+//    }
+
+
 
 }

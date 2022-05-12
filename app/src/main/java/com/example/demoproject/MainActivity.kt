@@ -10,13 +10,13 @@ import com.example.demoproject.databinding.ActivityMainBinding
 import com.example.demoproject.utils.SharedPrefs
 
 class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
 
-      val sharedPreferences = SharedPrefs(this)
+        val sharedPreferences = SharedPrefs(this)
         sharedPreferences.editor
         if (sharedPreferences.login) {
             callIntent()
@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity() {
             ) {
                 callIntent()
                 sharedPreferences.apply {
-                    login=true
-                    username =binding.TvEmail.text.toString()
+                    login = true
+                    username = binding.TvEmail.text.toString()
                     password = binding.TvPassword.text.toString()
                 }
             } else {

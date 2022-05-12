@@ -30,7 +30,7 @@ class TrainingActivityViewModel(private val repository: Repository) : ViewModel(
                         call: Call<TrainingCategories>,
                         response: Response<TrainingCategories>
                     ) {
-                        if (response?.body() != null) {
+                        if (response.body() != null) {
                             trainingResponse.postValue(response.body())
                             Log.d("response", response.toString())
                         }

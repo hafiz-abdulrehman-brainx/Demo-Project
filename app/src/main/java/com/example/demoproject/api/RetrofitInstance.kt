@@ -7,15 +7,15 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
-    private val interceptor : HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
+    private val interceptor: HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
         this.level = HttpLoggingInterceptor.Level.BODY
     }
 
-    private val client : OkHttpClient = OkHttpClient.Builder().apply {
+    private val client: OkHttpClient = OkHttpClient.Builder().apply {
         this.addInterceptor(interceptor)
     }.build()
 
-    private val retrofit by lazy{
+    private val retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -23,7 +23,7 @@ object RetrofitInstance {
             .build()
     }
 
-    val api:SimpleApi by lazy{
+    val api: SimpleApi by lazy {
         retrofit.create(SimpleApi::class.java)
     }
 }

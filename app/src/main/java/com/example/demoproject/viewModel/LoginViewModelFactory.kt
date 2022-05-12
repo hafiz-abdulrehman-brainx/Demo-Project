@@ -8,8 +8,8 @@ import com.example.demoproject.utils.SharedPrefs
 class LoginViewModelFactory(
     private val repository: Repository,
     private val sharedPrefs: SharedPrefs
-):ViewModelProvider.Factory {
+) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return LoginViewModel(repository,sharedPrefs) as T
+        return LoginViewModel(repository, sharedPrefs) as T
     }
 }
