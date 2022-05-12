@@ -22,7 +22,7 @@
         app:layout_constraintHorizontal_bias="0.65"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomeTxt"
-        tools:listitem="@layout/item_layout" />
+        />
 
     <ImageView
         android:id="@+id/imageView"
@@ -60,13 +60,12 @@
         app:layout_constraintTop_toBottomOf="@+id/Rv">
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/quote"
             android:layout_width="350sp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/ubuntu"
             android:gravity="center"
             android:padding="5dp"
-            android:text="@string/quote_text"
             android:textColor="@color/white"
             android:textSize="20sp" />
     </androidx.cardview.widget.CardView>

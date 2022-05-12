@@ -14,18 +14,17 @@ import com.example.demoproject.R
 import com.example.demoproject.activities.TrainingActivity
 import com.example.demoproject.adapters.RecyclerAdapter
 import com.example.demoproject.databinding.FragmentHomeBinding
-import com.example.demoproject.model.User
 import com.example.demoproject.repository.Repository
 import com.example.demoproject.utils.SharedPrefs
-import com.example.demoproject.viewModel.LoginViewModel
-import com.example.demoproject.viewModel.LoginViewModelFactory
+import com.example.demoproject.viewModel.WelcomeViewModel
+import com.example.demoproject.viewModel.WelcomeViewModelFactory
 
 class HomeFragment : Fragment() {
 
     private lateinit var images: List<Int>
     private lateinit var titles: List<String>
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var loginViewModel: LoginViewModel
+    private lateinit var welcomeViewModel: WelcomeViewModel
     private lateinit var sharedPrefs: SharedPrefs
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,20 +41,25 @@ class HomeFragment : Fragment() {
         setAssets()
         initializeViewModel(sharedPrefs)
         recyclerFunction()
-        val username = sharedPrefs.username
-        val password = sharedPrefs.password
-        val user = User(email = username!!, password = password)
-        loginViewModel.loginUser(user)
-        loginViewModel.userResponse.observe(viewLifecycleOwner) { response ->
-            binding.welcomeTxt.text = "WELCOME ${response.name.toString()}"
+        setWelcomeObserver()
+        var token = sharedPrefs.token
+        var client = sharedPrefs.client
+
+        if (token != null && client != null) {
+                welcomeViewModel.getQuotes(
+                    "application/json",
+                    token,
+                    client,
+                    "stage_agent@mailinator.com"
+                )
+
         }
+        binding.welcomeTxt.text = resources.getString(R.string.welcome ) +" "+ sharedPrefs.username
 
         binding.btnLogout.setOnClickListener {
-            if (sharedPrefs.login) {
                 sharedPrefs.editor.apply {
                     clear()
                     apply()
-                }
                 Intent(requireContext().applicationContext, MainActivity::class.java).run {
                     startActivity(this)
                 }
@@ -63,6 +67,18 @@ class HomeFragment : Fragment() {
         }
 
     }
+
+    private fun setWelcomeObserver() {
+        welcomeViewModel.quotesResponse.observe(viewLifecycleOwner) { response ->
+            if (response == null) //api always return null, checked on postman
+                binding.quote.text = resources.getString(R.string.quote_text)
+            else
+                binding.quote.text = response[0].text +"/n By" + response[0].author
+        }
+    }
+
+
+
 
     private fun setAssets() {
         titles = mutableListOf(
@@ -85,14 +101,12 @@ class HomeFragment : Fragment() {
 
     private fun initializeViewModel(sharedPrefs: SharedPrefs) {
         val repository = Repository()
-        val loginViewModel1: LoginViewModel by viewModels {
-            LoginViewModelFactory(
-                repository,
-                sharedPrefs
+        val welcomeViewModel1: WelcomeViewModel by viewModels {
+            WelcomeViewModelFactory(
+                repository
             )
         }
-        loginViewModel = loginViewModel1
-
+        welcomeViewModel = welcomeViewModel1
     }
 
     private fun recyclerFunction() {

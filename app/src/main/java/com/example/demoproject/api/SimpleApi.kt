@@ -1,5 +1,6 @@
 package com.example.demoproject.api
 
+import com.example.demoproject.model.Quotes
 import com.example.demoproject.model.TrainingCategories
 import com.example.demoproject.model.User
 import retrofit2.Call
@@ -17,4 +18,12 @@ interface SimpleApi {
         @Header("client") client: String,
         @Header("uid") uid: String
     ): Call<TrainingCategories>
+
+    @GET("/api/v1/quotes/random")
+    fun getQuotes(
+        @Header("content-type") contentType: String,
+        @Header("access-token") accessToken: String,
+        @Header("client") client: String,
+        @Header("uid") uid: String
+    ): Call<Quotes>
 }

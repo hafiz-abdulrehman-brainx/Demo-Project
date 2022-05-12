@@ -28,21 +28,6 @@ class ViewPageAdapter(fm: FragmentManager,lifecycle: Lifecycle) : FragmentStateA
     override fun getItemCount(): Int {
         return 3
     }
-//
-//    fun getPageTitle(position: Int): CharSequence? {
-//        when (position) {
-//            0 -> {
-//                return "Home"
-//            }
-//            1 -> {
-//                return "Notification"
-//            }
-//            2 -> {
-//                return "Setting"
-//            }
-//        }
-//        return "Home"
-//    }
 
 
 

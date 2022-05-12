@@ -26,7 +26,6 @@ class LoginViewModel(private val repository: Repository, private val sharedPrefs
                 call.enqueue(object : Callback<User> {
                     override fun onResponse(call: Call<User>, response: Response<User>) {
                         if (response.body() != null) {
-                            userResponse.postValue(response.body())
                             response.headers().apply {
                                 accessToken = this["Access-Token"].toString()
                                 clientId = this["client"].toString()
@@ -34,9 +33,14 @@ class LoginViewModel(private val repository: Repository, private val sharedPrefs
                             sharedPrefs.apply {
                                 token = accessToken
                                 client = clientId
+                                username = response.body()!!.name.toString()
+                                login = true
+                                password = user.password
                             }
+                         userResponse.postValue(response.body())
                         }
                     }
+
                     override fun onFailure(call: Call<User>, t: Throwable) {
                         Log.d("Exception", "Data not found")
                     }

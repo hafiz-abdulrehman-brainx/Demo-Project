@@ -23,14 +23,12 @@ class TabLayoutClass : AppCompatActivity() {
         binding.viewPager.adapter = ViewPageAdapter(supportFragmentManager, lifecycle)
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             run {
-                if (position == 0)
-                    tab.text = "Home"
-                else if (position == 1)
-                    tab.text = "Notification"
-                else if (position == 2)
-                    tab.text = "Setting"
-                else
-                    tab.text = "Home"
+               tab.text= when (position) {
+            0 ->"Home"
+            1 -> "Notification"
+            2 ->"Setting"
+             else ->"Home"
+               }
             }
         }.attach()
         binding.tabLayout.apply {

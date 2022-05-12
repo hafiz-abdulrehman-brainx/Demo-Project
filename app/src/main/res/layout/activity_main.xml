@@ -43,6 +43,7 @@
 
         <EditText
             android:id="@+id/TvEmail"
+            android:text="stage_agent@mailinator.com"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
@@ -64,6 +65,7 @@
             android:id="@+id/TvPassword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:text="123456"
             android:layout_marginTop="40dp"
             android:autofillHints=""
             android:background="@drawable/rounded_edittext"

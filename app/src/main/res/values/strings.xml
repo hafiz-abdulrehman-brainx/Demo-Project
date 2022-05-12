@@ -4,7 +4,6 @@
     <string name="powerLink">POWERED BY</string>
     <string name="Tab_layout">Tab layout</string>
     <string name="textview">TextView</string>
-    <string name="welcome_text">WELCOME</string>
     <string name="logo">logo</string>
     <string name="sign_up">SIGN IN</string>
     <string name="login">Login</string>
@@ -14,7 +13,7 @@
     <string name="training">Training</string>
     <string name="setting_fragment">Setting fragment</string>
     <string name="welcome">WELCOME</string>
-    <string name="quote_text">You can make money or you can make excuses. Which one do you prefer? By Tom ferry</string>
+    <string name="quote_text">You can make money or you can make excuses. Which one do you prefer? \n By Tom ferry</string>
     <string name="logout">Logout</string>
     <string name="notification_fragment">Notification Fragment</string>
 </resources>

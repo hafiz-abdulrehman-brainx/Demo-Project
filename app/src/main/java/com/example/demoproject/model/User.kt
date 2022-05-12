@@ -11,5 +11,4 @@ data class User(
     var email: String,
     @SerializedName("password")
     var password: String? = null
-
 )
