@@ -26,7 +26,10 @@ class MainActivity : AppCompatActivity() {
         sharedPrefs = SharedPrefs(this)
         initializeViewModel(sharedPrefs)
         setLoginObserver()
-
+        if(sharedPrefs.login)
+        {
+            callIntent()
+        }
         binding.btnLogin.setOnClickListener {
             if (
                 binding.TvEmail.text.toString().trim().isNotEmpty() &&
