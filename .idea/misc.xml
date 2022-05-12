@@ -3,8 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/hassa/AndroidStudioProjects/DemoProject/app/src/main/res/drawable/brainxlogo.xml" value="0.238" />
+        <entry key="..\:/Users/hassa/AndroidStudioProjects/DemoProject/app/src/main/res/drawable/comment.xml" value="0.238" />
+        <entry key="..\:/Users/hassa/AndroidStudioProjects/DemoProject/app/src/main/res/drawable/event.xml" value="0.238" />
+        <entry key="..\:/Users/hassa/AndroidStudioProjects/DemoProject/app/src/main/res/drawable/home.xml" value="0.124" />
+        <entry key="..\:/Users/hassa/AndroidStudioProjects/DemoProject/app/src/main/res/drawable/ic_training.xml" value="0.238" />
+        <entry key="..\:/Users/hassa/AndroidStudioProjects/DemoProject/app/src/main/res/drawable/img.xml" value="0.1065" />
         <entry key="..\:/Users/hassa/AndroidStudioProjects/DemoProject/app/src/main/res/drawable/rounded_edittext.xml" value="0.1495" />
+        <entry key="..\:/Users/hassa/AndroidStudioProjects/DemoProject/app/src/main/res/drawable/todo.xml" value="0.238" />
+        <entry key="..\:/Users/hassa/AndroidStudioProjects/DemoProject/app/src/main/res/font/.xml" value="0.14791666666666667" />
+        <entry key="..\:/Users/hassa/AndroidStudioProjects/DemoProject/app/src/main/res/font/login_font.xml" value="0.17960526315789474" />
         <entry key="..\:/Users/hassa/AndroidStudioProjects/DemoProject/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/hassa/AndroidStudioProjects/DemoProject/app/src/main/res/layout/activity_tab_layout.xml" value="0.1" />
+        <entry key="..\:/Users/hassa/AndroidStudioProjects/DemoProject/app/src/main/res/layout/activity_training.xml" value="0.152" />
+        <entry key="..\:/Users/hassa/AndroidStudioProjects/DemoProject/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/hassa/AndroidStudioProjects/DemoProject/app/src/main/res/layout/fragment_notifications.xml" value="0.16052631578947368" />
+        <entry key="..\:/Users/hassa/AndroidStudioProjects/DemoProject/app/src/main/res/layout/fragment_setting.xml" value="0.16052631578947368" />
+        <entry key="..\:/Users/hassa/AndroidStudioProjects/DemoProject/app/src/main/res/layout/item_layout.xml" value="0.4" />
+        <entry key="..\:/Users/hassa/AndroidStudioProjects/DemoProject/app/src/main/res/layout/training_item_layout.xml" value="0.264" />
       </map>
     </option>
   </component>

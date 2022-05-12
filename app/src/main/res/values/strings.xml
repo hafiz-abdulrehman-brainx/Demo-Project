@@ -1,5 +1,19 @@
 <resources>
     <string name="app_name">Demo Project</string>
-    <string name="signInLink" >Already a member? <a href="#">Sign In</a> </string>
-    <string name="powerLink"><a href="#">POWERED BY</a></string>
+    <string name="signInLink">Already a member? <a href="#">Sign In</a> </string>
+    <string name="powerLink">POWERED BY</string>
+    <string name="Tab_layout">Tab layout</string>
+    <string name="textview">TextView</string>
+    <string name="logo">logo</string>
+    <string name="sign_up">SIGN IN</string>
+    <string name="login">Login</string>
+    <string name="coldwell_banker_select">COLDWELL BANKER SELECT</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="training">Training</string>
+    <string name="setting_fragment">Setting fragment</string>
+    <string name="welcome">WELCOME</string>
+    <string name="quote_text">You can make money or you can make excuses. Which one do you prefer? \n By Tom ferry</string>
+    <string name="logout">Logout</string>
+    <string name="notification_fragment">Notification Fragment</string>
 </resources>
