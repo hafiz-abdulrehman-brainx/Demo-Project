@@ -27,9 +27,9 @@ class MainActivity : AppCompatActivity() {
         initializeViewModel(sharedPrefs)
         setLoginObserver()
         if(sharedPrefs.login)
-        {
             callIntent()
-        }
+        else
+            Toast.makeText(this, "Login to proceed", Toast.LENGTH_LONG).show()
         binding.btnLogin.setOnClickListener {
             if (
                 binding.TvEmail.text.toString().trim().isNotEmpty() &&
