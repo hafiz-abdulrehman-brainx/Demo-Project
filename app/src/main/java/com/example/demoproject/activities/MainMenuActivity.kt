@@ -5,17 +5,18 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import com.example.demoproject.R
 import com.example.demoproject.adapters.ViewPageAdapter
-import com.example.demoproject.databinding.ActivityTabLayoutBinding
+import com.example.demoproject.databinding.ActivityMainMenuBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
-class TabLayoutClass : AppCompatActivity() {
-    private lateinit var binding: ActivityTabLayoutBinding
+class MainMenuActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainMenuBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityTabLayoutBinding.inflate(LayoutInflater.from(this))
+        binding = ActivityMainMenuBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
 
+        supportActionBar?.hide()
         createViewPager()
     }
 

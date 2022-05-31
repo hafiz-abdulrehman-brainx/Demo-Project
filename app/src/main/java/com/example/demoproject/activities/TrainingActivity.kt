@@ -1,10 +1,13 @@
 package com.example.demoproject.activities
 
+import android.annotation.SuppressLint
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.demoproject.R
 import com.example.demoproject.adapters.TrainingRecyclerAdapter
 import com.example.demoproject.databinding.ActivityTrainingBinding
 import com.example.demoproject.repository.Repository
@@ -21,11 +24,17 @@ class TrainingActivity : AppCompatActivity() {
     private lateinit var sharedPrefs: SharedPrefs
     private lateinit var trainingAdapter:TrainingRecyclerAdapter
 
+    @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTrainingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.apply {
+            setDisplayShowTitleEnabled(false)
+            setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.white)))
+            setHomeAsUpIndicator(com.google.android.material.R.drawable.material_ic_keyboard_arrow_left_black_24dp)
+        }
         sharedPrefs = SharedPrefs(this)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 

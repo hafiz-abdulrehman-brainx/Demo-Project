@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.demoproject.MainActivity
+import com.example.demoproject.LoginActivity
 import com.example.demoproject.R
 import com.example.demoproject.activities.TrainingActivity
 import com.example.demoproject.adapters.RecyclerAdapter
@@ -60,7 +60,7 @@ class HomeFragment : Fragment() {
                 sharedPrefs.editor.apply {
                     clear()
                     apply()
-                Intent(requireContext().applicationContext, MainActivity::class.java).run {
+                Intent(requireContext().applicationContext, LoginActivity::class.java).run {
                     startActivity(this)
                 }
             }

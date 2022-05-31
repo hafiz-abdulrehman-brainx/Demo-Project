@@ -18,6 +18,8 @@ class LoginViewModel(private val repository: Repository, private val sharedPrefs
     val userResponse: MutableLiveData<User> = MutableLiveData()
     lateinit var accessToken: String
     lateinit var clientId: String
+
+
     fun loginUser(user: User) {
 
         viewModelScope.launch(Dispatchers.IO) {
